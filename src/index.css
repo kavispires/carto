@@ -1,13 +1,208 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif&display=swap');
+
+/* GLOBAL */
 body {
+  font-family: 'Noto Serif', serif;
+  background: linear-gradient(
+    to top,
+    #3a3128,
+    #41352b,
+    #483a2e,
+    #503e31,
+    #584235
+  );
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  height: 100vw;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+.title {
+  color: white;
+  text-align: center;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+.btn {
+  font-family: 'Noto Serif';
+  border: 1px solid transparent;
+  padding: 8px 32px;
+  border-radius: 1px;
+  cursor: pointer;
+  margin: 4px;
+}
+
+.btn:hover {
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  transform: none;
+  opacity: 0.5;
+}
+
+.btn--primary {
+  background: #a06440;
+}
+
+.btn--secondary {
+  border: 1px solid #a06440;
+  color: #e09264;
+  background: none;
+}
+
+.btn--wide {
+  width: 100%;
+  margin: 4px 0;
+}
+
+.btn--upper {
+  text-transform: uppercase;
+}
+
+/* MENU */
+
+.menu {
+  background-image: linear-gradient(
+    to left,
+    #3a3128,
+    #322922,
+    #29211b,
+    #211a15,
+    #1a120d
+  );
+  min-height: 50px;
+  border-bottom: 2px solid #1a120d;
+}
+
+.btn-menu {
+  font-family: system-ui;
+  color: white;
+  text-transform: uppercase;
+  padding: 16px 64px;
+  border: 5px solid transparent;
+  background: transparent;
+  cursor: pointer;
+}
+
+.btn-menu:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-bottom-color: white;
+}
+
+.btn-menu--left {
+  float: right;
+}
+
+/* FOOTER */
+
+footer {
+  display: flex;
+  justify-content: center;
+  padding: 8px;
+  margin-top: 32px;
+}
+
+/* CARDS */
+
+.card {
+  width: 200px;
+  border-radius: 10px;
+  box-shadow: black 3px 3px 10px;
+}
+
+.card-container {
+  width: 200px;
+  position: relative;
+}
+
+.card-mini {
+  width: 50px;
+  position: absolute;
+  border-radius: 5px;
+  box-shadow: black 2px 2px 5px;
+  left: -55px;
+}
+
+.card-icon {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  border-radius: 5px;
+  box-shadow: black 2px 2px 5px;
+  left: -55px;
+  top: 75px;
+}
+
+/* GOAL SELECTION */
+
+.goals-selection {
+  padding: 16px;
+  list-style: none;
+  display: flex;
+  /* background: #d08838; */
+  justify-content: space-evenly;
+}
+
+.goal-options {
+  display: flex;
+  flex-direction: column;
+}
+
+/* SELECT */
+
+.select {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 15px;
+  width: 100%;
+  margin: 8px 0;
+}
+.select select {
+  font-family: 'Noto Serif';
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+  padding: 8px 16px;
+  outline: 0;
+  border: 1px solid #a06440;
+  border-radius: 1px;
+  background: transparent;
+  color: #e09264;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+.select select::-ms-expand {
+  display: none;
+}
+.select select:hover,
+.select select:focus {
+  color: #000000;
+  background: #ffbe89;
+}
+.select select:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.select-arrow {
+  position: absolute;
+  top: 13px;
+  right: 15px;
+  pointer-events: none;
+  border-style: solid;
+  border-width: 8px 5px 0px 5px;
+  border-color: #ffffff transparent transparent transparent;
+}
+.select select:hover ~ .select-arrow,
+.select select:focus ~ .select-arrow {
+  border-top-color: #ffffff;
+}
+.select select:disabled ~ .select-arrow {
+  border-top-color: #97715d;
 }
