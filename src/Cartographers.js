@@ -25,6 +25,7 @@ class Cartographers extends Component {
         D: null,
       },
       isGoalsReady: false,
+      isGameActive: false,
     };
 
     this.switchTabs = this.switchTabs.bind(this);
@@ -149,7 +150,10 @@ class Cartographers extends Component {
   render() {
     console.log(this.state);
     return (
-      <Container menuAction={this.switchTabs}>
+      <Container
+        menuAction={this.switchTabs}
+        isGoalsReady={this.state.isGoalsReady}
+      >
         {this.state.tab === 'goals' && (
           <GoalsSelection
             selectGoalCard={this.selectGoalCard}
