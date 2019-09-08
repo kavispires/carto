@@ -6,10 +6,10 @@ import CARDS from './cards';
 import Card from './Card';
 
 const ICONS = {
-  farmlands: 'farmlands-icon',
-  forests: 'forests-icon',
-  territory: 'territory-icon',
-  villages: 'villages-icon',
+  farmlands: 'farmlands',
+  forests: 'forest',
+  territory: 'territory',
+  villages: 'village',
 };
 
 const Goal = ({
@@ -25,7 +25,7 @@ const Goal = ({
       {Boolean(selectedGoalCard) ? (
         <div className="card-container">
           <Card id={letterCard.number} className="card-mini" />
-          <Card id={ICONS[goalType]} className="card-icon" />
+          <Card id={ICONS[goalType]} className="card-icon" prefix="icon-" />
           <Card id={selectedGoalCard.number} />
         </div>
       ) : (
