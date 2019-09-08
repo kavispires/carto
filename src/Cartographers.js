@@ -32,9 +32,12 @@ class Cartographers extends Component {
       deck: [],
       ambushDeck: [],
       seasons: [],
-      round: -1,
-      deckIndex: 0,
+      round: 0,
+      deckIndex: -1,
       currentSeason: {},
+      currentDuration: 0,
+      currentCard: {},
+      previousCard: {},
     };
 
     this.switchTabs = this.switchTabs.bind(this);
@@ -47,15 +50,17 @@ class Cartographers extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (
-      this.state.tab !== prevState.tab &&
       this.state.tab === 'game' &&
+      this.state.tab !== prevState.tab &&
       !this.state.isGameActive
     ) {
+      console.log('%cTHIS IS HAPPENING', 'background:yellow');
       this.setup();
     }
   }
 
   switchTabs(e) {
+    console.log('%c-switchTabs', 'background:green;color:white');
     const id = typeof e === 'string' ? e : e.target.id;
 
     if (id && this.state.tab !== id) {
@@ -64,6 +69,7 @@ class Cartographers extends Component {
   }
 
   selectGoalCard(value, letter) {
+    console.log('%c-selectGoalCard', 'background:green;color:white');
     const goal = _.find(CARDS.GOAL_CARDS, o => o.number === +value);
 
     const goals = {
@@ -89,6 +95,7 @@ class Cartographers extends Component {
   }
 
   selectRandomGoalCard(letter) {
+    console.log('%c-selectRandomGoalCard', 'background:green;color:white');
     const notAllowedTypes = Object.values({
       ...this.state.goalsType,
       [letter]: null,
@@ -110,8 +117,9 @@ class Cartographers extends Component {
   }
 
   setup() {
+    console.log('%c-setup', 'background:green;color:white');
     this.setState({
-      isGoalsReady: true,
+      isGameActive: true,
       // Create deck
       deck: [...CARDS.EXPLORE_CARDS],
       // Create ambush and shuffle deck
@@ -123,14 +131,15 @@ class Cartographers extends Component {
     // Wait for state to be set before running setup season
     setTimeout(() => {
       this.setupSeason();
-    }, 1000);
+    }, 500);
   }
 
   setupSeason() {
+    console.log('%c-setupSeason', 'background:green;color:white');
     // Increase season
     const round = this.state.round + 1;
     // Reset deck index
-    const deckIndex = 0;
+    const deckIndex = -1;
     // Get ambush card
     const ambushDeck = [...this.state.ambushDeck];
     const ambushCard = ambushDeck.pop();
@@ -140,7 +149,7 @@ class Cartographers extends Component {
     deck.push(ambushCard);
     deck = this.shuffleDeck(deck);
     // Set current season
-    const currentSeason = { ...CARDS.SEASON_CARDS[round] };
+    const currentSeason = { ...CARDS.SEASON_CARDS[round - 1] };
     this.setState({
       round,
       deckIndex,
@@ -151,14 +160,20 @@ class Cartographers extends Component {
   }
 
   startSeason() {
+    console.log('%c-startSeason', 'background:green;color:white');
     this.setState({
       phase: 'explore',
     });
+
+    setTimeout(() => {
+      this.nextTurn();
+    }, 500);
   }
 
   nextTurn() {
+    console.log('%c-nextTurn', 'background:green;color:white');
     // Check of season threshold
-    if (this.deckIndex + 1 >= this.currentSeason.duration) {
+    if (this.state.currentDuration + 1 >= this.state.currentSeason.duration) {
       this.scorePhase();
     } else {
       this.explorePhase();
@@ -166,25 +181,39 @@ class Cartographers extends Component {
   }
 
   explorePhase() {
+    console.log('%c-explorePhase', 'background:green;color:white');
     // Add one to deckIndex
     const deckIndex = this.state.deckIndex + 1;
     // Revealing next card of the deck
-    const currentCard = this.statedeck[deckIndex];
-    // If ruin, call explore phase again
-    if (currentCard.type === 'ruin') {
-      // Display card
-      // TO-DO
-      // Call explore phase again
-      this.explorePhase();
+    const currentCard = this.state.deck[deckIndex];
+    // Set previous card
+    const previousCard = deckIndex > 0 ? this.state.deck[deckIndex - 1] : {};
+
+    // Calculate duration
+    let currentDuration = 0;
+    for (let i = 0; i <= deckIndex; i++) {
+      currentDuration += this.state.deck[i].duration;
     }
 
     this.setState({
       deckIndex,
+      currentDuration,
+      currentCard,
+      previousCard,
     });
+
+    // If ruin, call explore phase again
+    if (currentCard.type === 'ruin') {
+      console.log('%cRUIN', 'background:brown', currentCard);
+      setTimeout(() => {
+        this.explorePhase();
+      }, 500);
+    } else {
+    }
   }
 
   scorePhase() {
-    console.log('SCORE PHASE');
+    console.log('%c-scorePhase', 'background:pink;color:white');
   }
 
   shuffleDeck(array) {
@@ -197,6 +226,7 @@ class Cartographers extends Component {
 
   render() {
     console.log(this.state);
+
     return (
       <Container
         menuAction={this.switchTabs}
@@ -214,7 +244,7 @@ class Cartographers extends Component {
           <Season state={this.state} startSeason={this.startSeason} />
         )}
         {this.state.tab === 'game' && this.state.phase === 'explore' && (
-          <Explore state={this.state} />
+          <Explore state={this.state} nextTurn={this.nextTurn} />
         )}
       </Container>
     );

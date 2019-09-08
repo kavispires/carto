@@ -1,40 +1,40 @@
 import React from 'react';
 
-// Import Data
-import CARDS from './cards';
 // Import Components
 import Card from './Card';
 
-const PreviousCard = ({ props }) => {
+const PreviousCard = ({ previousCard }) => {
+  const cardNumber = previousCard.number || 0;
+
   return (
-    <div className="something">
-      <Card id={1} className="card card--faded-left" />
+    <div className="explore-card">
+      <Card id={cardNumber} className="card card--faded-left" />
     </div>
   );
 };
 
-const CurrentCard = ({ props }) => {
+const CurrentCard = ({ currentCard, previousCard }) => {
   return (
-    <div className="something">
-      <Card id={2} />
+    <div className="explore-card">
+      {previousCard.type === 'ruin' ? (
+        <Card id={previousCard.number} className="card-mini card-mini--ruin" />
+      ) : null}
+      <Card id={currentCard.number} />
     </div>
   );
 };
 
-const NextCard = ({ props }) => {
+const NextCard = () => {
   return (
-    <div className="something">
+    <div className="explore-card">
       <Card id={0} className="card card--faded-right" />
     </div>
   );
 };
 
-const Explore = ({
-  selectGoalCard,
-  selectRandomGoalCard,
-  state,
-  switchTabs,
-}) => {
+const Explore = ({ state, nextTurn }) => {
+  const { currentSeason, currentDuration, currentCard, previousCard } = state;
+
   return (
     <main>
       <h1 className="title">
@@ -43,19 +43,18 @@ const Explore = ({
           className="card-icon card-icon--inline-title"
           prefix="icon-"
         />
-        Spring 0/8
+        {currentSeason.name}
       </h1>
+      <h2 className="subtitle">
+        Time remaining: {currentSeason.duration - currentDuration}
+      </h2>
       <section className="playarea">
-        <PreviousCard />
-        <CurrentCard />
+        <PreviousCard previousCard={previousCard} />
+        <CurrentCard currentCard={currentCard} previousCard={previousCard} />
         <NextCard />
       </section>
       <footer>
-        <button
-          className="btn btn--primary"
-          onClick={() => switchTabs('game')}
-          disabled={!state}
-        >
+        <button className="btn btn--primary" onClick={() => nextTurn()}>
           Next
         </button>
       </footer>

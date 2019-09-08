@@ -1,7 +1,5 @@
 import React from 'react';
 
-// Import Data
-import CARDS from './cards';
 // Import Components
 import Card from './Card';
 
@@ -12,7 +10,6 @@ const Season = ({ state, startSeason }) => {
     return (
       <main>
         <h1 className="title">
-          {' '}
           <Card
             id="season"
             className="card-icon card-icon--inline-title"
@@ -30,8 +27,11 @@ const Season = ({ state, startSeason }) => {
               ? 'scoring-card--active'
               : '';
             return (
-              <div className={`scoring-card ${highlightClass}`}>
-                <Card key={goal.number} id={goal.number} />
+              <div
+                key={`scoring-card-${goal.number}`}
+                className={`scoring-card ${highlightClass}`}
+              >
+                <Card id={goal.number} />
                 <p className="card-description">{goal.effect}</p>
               </div>
             );
