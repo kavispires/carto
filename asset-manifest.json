@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/carto/static/css/main.166d1ec0.chunk.css",
+    "main.css": "/carto/static/css/main.ff2a5d7b.chunk.css",
     "main.js": "/carto/static/js/main.5f972e61.chunk.js",
     "main.js.map": "/carto/static/js/main.5f972e61.chunk.js.map",
     "runtime~main.js": "/carto/static/js/runtime~main.dfb13643.js",
@@ -8,8 +8,8 @@
     "static/js/2.380a0335.chunk.js": "/carto/static/js/2.380a0335.chunk.js",
     "static/js/2.380a0335.chunk.js.map": "/carto/static/js/2.380a0335.chunk.js.map",
     "index.html": "/carto/index.html",
-    "precache-manifest.7bad91405111cd8e3b3041aa6b91b84b.js": "/carto/precache-manifest.7bad91405111cd8e3b3041aa6b91b84b.js",
+    "precache-manifest.c810b23e35ddaae27501a2cca5c74dc7.js": "/carto/precache-manifest.c810b23e35ddaae27501a2cca5c74dc7.js",
     "service-worker.js": "/carto/service-worker.js",
-    "static/css/main.166d1ec0.chunk.css.map": "/carto/static/css/main.166d1ec0.chunk.css.map"
+    "static/css/main.ff2a5d7b.chunk.css.map": "/carto/static/css/main.ff2a5d7b.chunk.css.map"
   }
 }
