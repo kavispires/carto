@@ -35,6 +35,7 @@ const NextCard = () => {
 const Explore = ({ state, nextTurn }) => {
   const { currentSeason, currentDuration, currentCard, previousCard } = state;
 
+  const timeRemaining = currentSeason.duration - currentDuration;
   return (
     <main>
       <h1 className="title">
@@ -46,7 +47,7 @@ const Explore = ({ state, nextTurn }) => {
         {currentSeason.name}
       </h1>
       <h2 className="subtitle">
-        Time remaining: {currentSeason.duration - currentDuration}
+        Time remaining: {timeRemaining > -1 ? timeRemaining : 0}
       </h2>
       <section className="playarea">
         <PreviousCard previousCard={previousCard} />
@@ -55,7 +56,7 @@ const Explore = ({ state, nextTurn }) => {
       </section>
       <footer>
         <button className="btn btn--primary" onClick={() => nextTurn()}>
-          Next
+          {timeRemaining > 0 ? 'Next Turn' : 'Score Season'}
         </button>
       </footer>
     </main>

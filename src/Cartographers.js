@@ -8,6 +8,7 @@ import Container from './Container';
 import GoalsSelection from './GoalsSelection';
 import Explore from './Explore';
 import Season from './Season';
+import Scoring from './Scoring';
 
 class Cartographers extends Component {
   constructor() {
@@ -135,7 +136,8 @@ class Cartographers extends Component {
   }
 
   setupSeason() {
-    console.log('%c-setupSeason', 'background:green;color:white');
+    console.log('%c-setupSeason', 'background:blue;color:white');
+    console.log(this.state);
     // Increase season
     const round = this.state.round + 1;
     // Reset deck index
@@ -151,16 +153,20 @@ class Cartographers extends Component {
     // Set current season
     const currentSeason = { ...CARDS.SEASON_CARDS[round - 1] };
     this.setState({
+      phase: 'season',
       round,
       deckIndex,
       ambushDeck,
       deck,
       currentSeason,
+      previousCard: {},
+      currentDuration: 0,
+      currentCard: {},
     });
   }
 
   startSeason() {
-    console.log('%c-startSeason', 'background:green;color:white');
+    console.log('%c-startSeason', 'background:cyan;color:white');
     this.setState({
       phase: 'explore',
     });
@@ -171,9 +177,12 @@ class Cartographers extends Component {
   }
 
   nextTurn() {
-    console.log('%c-nextTurn', 'background:green;color:white');
+    console.log('%c-nextTurn', 'background:orange;color:white');
     // Check of season threshold
-    if (this.state.currentDuration + 1 >= this.state.currentSeason.duration) {
+    if (
+      this.state.currentDuration >= this.state.currentSeason.duration &&
+      this.state.phase === 'explore'
+    ) {
       this.scorePhase();
     } else {
       this.explorePhase();
@@ -195,12 +204,16 @@ class Cartographers extends Component {
       currentDuration += this.state.deck[i].duration;
     }
 
-    this.setState({
+    const updateObject = {
       deckIndex,
       currentDuration,
       currentCard,
       previousCard,
-    });
+    };
+    if (this.state.phase !== 'explore') updateObject.phase = 'explore';
+    this.setState(updateObject);
+
+    // TO-DO: If ambush, resolve and flag to remove
 
     // If ruin, call explore phase again
     if (currentCard.type === 'ruin') {
@@ -214,6 +227,9 @@ class Cartographers extends Component {
 
   scorePhase() {
     console.log('%c-scorePhase', 'background:pink;color:white');
+    this.setState({
+      phase: 'scoring',
+    });
   }
 
   shuffleDeck(array) {
@@ -225,8 +241,6 @@ class Cartographers extends Component {
   }
 
   render() {
-    console.log(this.state);
-
     return (
       <Container
         menuAction={this.switchTabs}
@@ -245,6 +259,9 @@ class Cartographers extends Component {
         )}
         {this.state.tab === 'game' && this.state.phase === 'explore' && (
           <Explore state={this.state} nextTurn={this.nextTurn} />
+        )}
+        {this.state.tab === 'game' && this.state.phase === 'scoring' && (
+          <Scoring state={this.state} nextTurn={this.setupSeason} />
         )}
       </Container>
     );

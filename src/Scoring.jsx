@@ -3,7 +3,7 @@ import React from 'react';
 // Import Components
 import Card from './Card';
 
-const Season = ({ state, startSeason }) => {
+const Scoring = ({ state, nextTurn }) => {
   const { currentSeason, goals } = state;
 
   if (currentSeason.number) {
@@ -15,21 +15,18 @@ const Season = ({ state, startSeason }) => {
             className="card-icon card-icon--inline-title"
             prefix="icon-"
           />
-          Next Season: {currentSeason.name}
+          Scoring Season: {currentSeason.name}
         </h1>
         <h2 className="subtitle">
-          Duration: {currentSeason.duration} | Scoring:{' '}
-          {currentSeason.scores.join(' & ')}
+          Scoring: {currentSeason.scores.join(' & ')}
         </h2>
         <section className="seasonarea">
-          {Object.entries(goals).map(([key, goal]) => {
-            const highlightClass = currentSeason.scores.includes(key)
-              ? 'scoring-card--active'
-              : '';
+          {currentSeason.scores.map(letter => {
+            const goal = goals[letter];
             return (
               <div
                 key={`scoring-card-${goal.number}`}
-                className={`scoring-card ${highlightClass}`}
+                className="scoring-card scoring-card--scoring"
               >
                 <Card id={goal.number} />
                 <p className="card-description">{goal.effect}</p>
@@ -38,9 +35,11 @@ const Season = ({ state, startSeason }) => {
           })}
         </section>
         <footer>
-          <button className="btn btn--primary" onClick={() => startSeason()}>
-            Begin Season
-          </button>
+          {currentSeason.name !== 'Winter' ? (
+            <button className="btn btn--primary" onClick={() => nextTurn()}>
+              Go to Next Season
+            </button>
+          ) : null}
         </footer>
       </main>
     );
@@ -49,4 +48,4 @@ const Season = ({ state, startSeason }) => {
   return <div></div>;
 };
 
-export default Season;
+export default Scoring;
