@@ -6,12 +6,15 @@ import CARDS from './cards';
 // Import Components
 import Container from './Container';
 import GoalsSelection from './GoalsSelection';
+import Explore from './Explore';
+import Season from './Season';
 
 class Cartographers extends Component {
   constructor() {
     super();
     this.state = {
       tab: 'goals',
+      phase: 'season',
       goals: {
         A: null,
         B: null,
@@ -26,11 +29,30 @@ class Cartographers extends Component {
       },
       isGoalsReady: false,
       isGameActive: false,
+      deck: [],
+      ambushDeck: [],
+      seasons: [],
+      round: -1,
+      deckIndex: 0,
+      currentSeason: {},
     };
 
     this.switchTabs = this.switchTabs.bind(this);
     this.selectGoalCard = this.selectGoalCard.bind(this);
     this.selectRandomGoalCard = this.selectRandomGoalCard.bind(this);
+    this.setupSeason = this.setupSeason.bind(this);
+    this.startSeason = this.startSeason.bind(this);
+    this.nextTurn = this.nextTurn.bind(this);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      this.state.tab !== prevState.tab &&
+      this.state.tab === 'game' &&
+      !this.state.isGameActive
+    ) {
+      this.setup();
+    }
   }
 
   switchTabs(e) {
@@ -88,29 +110,50 @@ class Cartographers extends Component {
   }
 
   setup() {
-    // Choose the 4 scoring cards (dropdowns)
+    this.setState({
+      isGoalsReady: true,
+      // Create deck
+      deck: [...CARDS.EXPLORE_CARDS],
+      // Create ambush and shuffle deck
+      ambushDeck: this.shuffleDeck([...CARDS.AMBUSH_CARDS]),
+      // Create seasons deck
+      seasons: [...CARDS.SEASON_CARDS],
+    });
 
-    // Create deck
-    this.deck = [...CARDS.EXPLORE_CARDS];
-    // Create ambush deck
-    this.ambush = [...CARDS.AMBUSH_CARDS];
-    // Shuffle ambush cards
-    this.ambush = this.shuffleDeck(this.ambush);
-    // Create seasons deck
-    this.seasons = [...CARDS.SEASON_CARDS];
+    // Wait for state to be set before running setup season
+    setTimeout(() => {
+      this.setupSeason();
+    }, 1000);
+  }
+
+  setupSeason() {
+    // Increase season
+    const round = this.state.round + 1;
+    // Reset deck index
+    const deckIndex = 0;
+    // Get ambush card
+    const ambushDeck = [...this.state.ambushDeck];
+    const ambushCard = ambushDeck.pop();
+    // Get deck
+    let deck = [...this.state.deck];
+    // Add ambush card to deck and shuffle
+    deck.push(ambushCard);
+    deck = this.shuffleDeck(deck);
+    // Set current season
+    const currentSeason = { ...CARDS.SEASON_CARDS[round] };
+    this.setState({
+      round,
+      deckIndex,
+      ambushDeck,
+      deck,
+      currentSeason,
+    });
   }
 
   startSeason() {
-    // Increase season
-    this.round += 1;
-    // Reset deck index
-    this.deckIndex = 0;
-    // Add last ambush to deck
-    this.deck.push(this.ambush.pop());
-    // Shuffle deck
-    this.deck = this.shuffleDeck(this.deck);
-    // Set current season
-    this.currentSeason = { ...CARDS.SEASON_CARDS[this.round] };
+    this.setState({
+      phase: 'explore',
+    });
   }
 
   nextTurn() {
@@ -124,9 +167,9 @@ class Cartographers extends Component {
 
   explorePhase() {
     // Add one to deckIndex
-    this.deckIndex += 1;
+    const deckIndex = this.state.deckIndex + 1;
     // Revealing next card of the deck
-    const currentCard = this.deck[this.deckIndex];
+    const currentCard = this.statedeck[deckIndex];
     // If ruin, call explore phase again
     if (currentCard.type === 'ruin') {
       // Display card
@@ -134,10 +177,15 @@ class Cartographers extends Component {
       // Call explore phase again
       this.explorePhase();
     }
-    // Display card
+
+    this.setState({
+      deckIndex,
+    });
   }
 
-  scorePhase() {}
+  scorePhase() {
+    console.log('SCORE PHASE');
+  }
 
   shuffleDeck(array) {
     // Shuffle cards
@@ -161,6 +209,12 @@ class Cartographers extends Component {
             state={this.state}
             switchTabs={this.switchTabs}
           />
+        )}
+        {this.state.tab === 'game' && this.state.phase === 'season' && (
+          <Season state={this.state} startSeason={this.startSeason} />
+        )}
+        {this.state.tab === 'game' && this.state.phase === 'explore' && (
+          <Explore state={this.state} />
         )}
       </Container>
     );

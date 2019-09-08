@@ -110,25 +110,25 @@ const SEASON_CARDS = [
   {
     number: 18,
     name: 'Spring',
-    scores: 'A B',
+    scores: ['A', 'B'],
     duration: 8,
   },
   {
     number: 19,
-    name: 'Summber',
-    scores: 'B C',
+    name: 'Summer',
+    scores: ['B', 'C'],
     duration: 8,
   },
   {
     number: 20,
     name: 'Fall',
-    scores: 'C D',
+    scores: ['C', 'D'],
     duration: 7,
   },
   {
     number: 21,
     name: 'Winter',
-    scores: 'D A',
+    scores: ['D', 'A'],
     duration: 6,
   },
 ];

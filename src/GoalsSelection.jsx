@@ -25,7 +25,11 @@ const Goal = ({
       {Boolean(selectedGoalCard) ? (
         <div className="card-container">
           <Card id={letterCard.number} className="card-mini" />
-          <Card id={ICONS[goalType]} className="card-icon" prefix="icon-" />
+          <Card
+            id={ICONS[goalType]}
+            className="card-icon card-icon--selected"
+            prefix="icon-"
+          />
           <Card id={selectedGoalCard.number} />
         </div>
       ) : (
