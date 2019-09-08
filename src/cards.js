@@ -152,7 +152,7 @@ const GOAL_CARDS = [
     name: 'Treetower',
     type: 'forests',
     effect:
-      '1 point per forest space with all four spaces surrounded by filled spaces',
+      '1 point per forest space with all four sides surrounded by filled spaces',
   },
   {
     number: 29,
@@ -166,28 +166,28 @@ const GOAL_CARDS = [
     name: 'Canal Lake',
     type: 'farmlands',
     effect:
-      '1 point per water space adjacent to a farm space. 1 point per farm space adjacent to a water space',
+      '1 point per water space adjacent to a farm space.\n 1 point per farm space adjacent to a water space',
   },
   {
     number: 31,
     name: 'Mages Valley',
     type: 'farmlands',
     effect:
-      '2 points per water space adjacent to a mountain. 1 point per farm space adjacent to a mountain.',
+      '2 points per water space adjacent to a mountain.\n 1 point per farm space adjacent to a mountain.',
   },
   {
     number: 32,
     name: 'The Golden Granary',
     type: 'farmlands',
     effect:
-      '1 point per water space adjacent to a ruin space. 3 points per farm space on a ruin space',
+      '1 point per water space adjacent to a ruin space.\n 3 points per farm space on a ruin space',
   },
   {
     number: 33,
     name: 'Shoreside Expanse',
     type: 'farmlands',
     effect:
-      '3 points per cluster of farm not adjacent to water spaces or the edge of the map. 3 points per cluster of water not adjacent to farm spaces or the edge of the map',
+      '3 points per cluster of farm not adjacent to water spaces or the edge of the map.\n 3 points per cluster of water not adjacent to farm spaces or the edge of the map',
   },
   {
     number: 34,

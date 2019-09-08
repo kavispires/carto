@@ -7,7 +7,7 @@ const PreviousCard = ({ previousCard }) => {
   const cardNumber = previousCard.number || 0;
 
   return (
-    <div className="explore-card">
+    <div className="explore-card explore-card--previous">
       <Card id={cardNumber} className="card card--faded-left" />
     </div>
   );
@@ -15,7 +15,7 @@ const PreviousCard = ({ previousCard }) => {
 
 const CurrentCard = ({ currentCard, previousCard }) => {
   return (
-    <div className="explore-card">
+    <div className="explore-card explore-card--current">
       {previousCard.type === 'ruin' ? (
         <Card id={previousCard.number} className="card-mini card-mini--ruin" />
       ) : null}
@@ -24,10 +24,11 @@ const CurrentCard = ({ currentCard, previousCard }) => {
   );
 };
 
-const NextCard = () => {
+const NextCard = ({ currentCard }) => {
   return (
-    <div className="explore-card">
+    <div className="explore-card explore-card--next">
       <Card id={0} className="card card--faded-right" />
+      <Card id={currentCard.number + 1} className="invisible" />
     </div>
   );
 };
@@ -52,7 +53,7 @@ const Explore = ({ state, nextTurn }) => {
       <section className="playarea">
         <PreviousCard previousCard={previousCard} />
         <CurrentCard currentCard={currentCard} previousCard={previousCard} />
-        <NextCard />
+        <NextCard currentCard={currentCard} />
       </section>
       <footer>
         <button className="btn btn--primary" onClick={() => nextTurn()}>

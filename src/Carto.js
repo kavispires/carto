@@ -10,37 +10,39 @@ import Explore from './Explore';
 import Season from './Season';
 import Scoring from './Scoring';
 
+const initialState = {
+  tab: 'goals',
+  phase: 'season',
+  goals: {
+    A: null,
+    B: null,
+    C: null,
+    D: null,
+  },
+  goalsType: {
+    A: null,
+    B: null,
+    C: null,
+    D: null,
+  },
+  isGoalsReady: false,
+  isGameActive: false,
+  deck: [],
+  ambushDeck: [],
+  seasons: [],
+  round: 0,
+  deckIndex: -1,
+  currentSeason: {},
+  currentDuration: 0,
+  currentCard: {},
+  previousCard: {},
+  usedAmbushIndexes: [],
+};
+
 class Carto extends Component {
   constructor() {
     super();
-    this.state = {
-      tab: 'goals',
-      phase: 'season',
-      goals: {
-        A: null,
-        B: null,
-        C: null,
-        D: null,
-      },
-      goalsType: {
-        A: null,
-        B: null,
-        C: null,
-        D: null,
-      },
-      isGoalsReady: false,
-      isGameActive: false,
-      deck: [],
-      ambushDeck: [],
-      seasons: [],
-      round: 0,
-      deckIndex: -1,
-      currentSeason: {},
-      currentDuration: 0,
-      currentCard: {},
-      previousCard: {},
-      usedAmbushIndexes: [],
-    };
+    this.state = Object.assign({}, initialState);
 
     this.switchTabs = this.switchTabs.bind(this);
     this.selectGoalCard = this.selectGoalCard.bind(this);
@@ -59,13 +61,18 @@ class Carto extends Component {
       this.setup();
     }
   }
-
   switchTabs(e) {
     const id = typeof e === 'string' ? e : e.target.id;
 
-    if (id && this.state.tab !== id) {
+    if (id === 'reset') {
+      this.reset();
+    } else if (id && this.state.tab !== id) {
       this.setState({ tab: id });
     }
+  }
+
+  reset() {
+    this.setState({ ...initialState });
   }
 
   selectGoalCard(value, letter) {

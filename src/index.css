@@ -285,3 +285,21 @@ footer {
 .explore-card {
   position: relative;
 }
+
+.invisible {
+  position: absolute;
+  opacity: 0.1;
+  width: 1px;
+}
+
+.explore-card--previous {
+  /* animation: flip-scale-2-ver-left 0.5s linear both; */
+}
+
+.explore-card--current {
+  /* animation: flip-scale-2-ver-left 0.5s linear both; */
+}
+
+.explore-card--next {
+  /* animation: flip-scale-2-ver-left 0.5s linear both; */
+}
