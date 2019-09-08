@@ -236,6 +236,24 @@ class Cartographers extends Component {
     // Shuffle cards
     const shuffledDeck = [...array.sort(() => Math.random() - 0.5)];
     // Verify if an ambush is after a ruin and permutate their positions
+    const RUINS = { 5: true, 6: true };
+    const AMBUSHES = { 1: true, 2: true, 3: true, 4: true };
+    let isDeckReady = false;
+    while (!isDeckReady) {
+      isDeckReady = true;
+      for (let i = 0; i < shuffledDeck.length; i++) {
+        const currentEl = shuffledDeck[i];
+        const previousEl = shuffledDeck[i - 1] || {};
+
+        if (RUINS[previousEl.number] && AMBUSHES[currentEl.number]) {
+          isDeckReady = false;
+          [shuffledDeck[i - 1], shuffledDeck[i]] = [
+            shuffledDeck[i],
+            shuffledDeck[i - 1],
+          ];
+        }
+      }
+    }
 
     return shuffledDeck;
   }
