@@ -144,22 +144,19 @@ const GOAL_CARDS = [
     number: 27,
     name: 'Greenbough',
     type: 'forests',
-    effect:
-      '1 point per column or row with at least one forest space (both column and row score)',
+    effect: '1 point per column or row with at least one forest space (both column and row score)',
   },
   {
     number: 28,
     name: 'Treetower',
     type: 'forests',
-    effect:
-      '1 point per forest space with all four sides surrounded by filled spaces',
+    effect: '1 point per forest space with all four sides surrounded by filled spaces',
   },
   {
     number: 29,
     name: 'Sentinel Wood',
     type: 'forests',
-    effect:
-      '3 points for each mountain connected by a cluster of forest spaces',
+    effect: '3 points for each mountain connected by a cluster of forest spaces',
   },
   {
     number: 30,

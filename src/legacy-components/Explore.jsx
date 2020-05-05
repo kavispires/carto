@@ -40,16 +40,10 @@ const Explore = ({ state, nextTurn }) => {
   return (
     <main>
       <h1 className="title">
-        <Card
-          id="season"
-          className="card-icon card-icon--inline-title"
-          prefix="icon-"
-        />
+        <Card id="season" className="card-icon card-icon--inline-title" prefix="icon-" />
         {currentSeason.name}
       </h1>
-      <h2 className="subtitle">
-        Time remaining: {timeRemaining > -1 ? timeRemaining : 0}
-      </h2>
+      <h2 className="subtitle">Time remaining: {timeRemaining > -1 ? timeRemaining : 0}</h2>
       <section className="playarea">
         <PreviousCard previousCard={previousCard} />
         <CurrentCard currentCard={currentCard} previousCard={previousCard} />

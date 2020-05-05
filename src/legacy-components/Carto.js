@@ -53,11 +53,7 @@ class Carto extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (
-      this.state.tab === 'game' &&
-      this.state.tab !== prevState.tab &&
-      !this.state.isGameActive
-    ) {
+    if (this.state.tab === 'game' && this.state.tab !== prevState.tab && !this.state.isGameActive) {
       this.setup();
     }
   }
@@ -76,17 +72,14 @@ class Carto extends Component {
   }
 
   selectGoalCard(value, letter) {
-    const goal = _.find(CARDS.GOAL_CARDS, o => o.number === +value);
+    const goal = _.find(CARDS.GOAL_CARDS, (o) => o.number === +value);
 
     const goals = {
       ...this.state.goals,
       [letter]: goal,
     };
 
-    const isGoalsReady = Object.values(goals).reduce(
-      (r, g) => (g !== null ? r : false),
-      true
-    );
+    const isGoalsReady = Object.values(goals).reduce((r, g) => (g !== null ? r : false), true);
 
     const goalsType = {
       ...this.state.goalsType,
@@ -112,8 +105,7 @@ class Carto extends Component {
     let randomGoal = null;
 
     while (!randomGoal) {
-      randomGoal =
-        CARDS.GOAL_CARDS[Math.floor(Math.random() * CARDS.GOAL_CARDS.length)];
+      randomGoal = CARDS.GOAL_CARDS[Math.floor(Math.random() * CARDS.GOAL_CARDS.length)];
       if (notAllowedTypes[randomGoal.type]) {
         randomGoal = null;
       }
@@ -257,10 +249,7 @@ class Carto extends Component {
 
         if (RUINS[previousEl.number] && AMBUSHES[currentEl.number]) {
           isDeckReady = false;
-          [shuffledDeck[i - 1], shuffledDeck[i]] = [
-            shuffledDeck[i],
-            shuffledDeck[i - 1],
-          ];
+          [shuffledDeck[i - 1], shuffledDeck[i]] = [shuffledDeck[i], shuffledDeck[i - 1]];
         }
       }
     }
@@ -270,10 +259,7 @@ class Carto extends Component {
 
   render() {
     return (
-      <Container
-        menuAction={this.switchTabs}
-        isGoalsReady={this.state.isGoalsReady}
-      >
+      <Container menuAction={this.switchTabs} isGoalsReady={this.state.isGoalsReady}>
         {this.state.tab === 'goals' && (
           <GoalsSelection
             selectGoalCard={this.selectGoalCard}
