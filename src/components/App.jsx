@@ -3,7 +3,7 @@ import Container from '@material-ui/core/Container';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 import useGlobalState from '../useGlobalState';
-import { SCREENS } from '../utils/contants';
+import { SCREENS } from '../utils/constants';
 
 import Explore from './Explore';
 import Goals from './Goals';

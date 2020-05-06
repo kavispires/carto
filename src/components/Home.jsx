@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import logo from '../images/carto-logo.svg';
 
 import useGlobalState from '../useGlobalState';
-import { SCREENS } from '../utils/contants';
+import { SCREENS } from '../utils/constants';
 
 const Home = () => {
   // Global States

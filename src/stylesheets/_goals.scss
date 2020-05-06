@@ -1,0 +1,24 @@
+.goals-list {
+  display: flex;
+  padding: $unit3 0;
+}
+
+.goal-card {
+  // background: orange;
+
+  width: 25%;
+  padding: 0 $unit2;
+
+  display: flex;
+  flex-direction: row;
+
+  &__types {
+    margin-right: $unit1;
+  }
+
+  &__main {
+  }
+
+  &__effect {
+  }
+}

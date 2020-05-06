@@ -2,7 +2,7 @@ import { createGlobalState } from 'react-hooks-global-state';
 
 import gameEngine from './engine';
 
-import { SCREENS } from './utils/contants';
+import { SCREENS } from './utils/constants';
 
 const initialState = {
   screen: SCREENS.HOME,

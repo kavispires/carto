@@ -12,14 +12,16 @@ import logo from '../images/carto-logo.svg';
 
 import gameEngine from '../engine';
 import useGlobalState from '../useGlobalState';
-import { COLORS, SCREENS } from '../utils/contants';
+import { COLORS, SCREENS } from '../utils/constants';
 
 const Setup = () => {
   // Global States
   const [, setScreen] = useGlobalState('screen');
+  const [, setGame] = useGlobalState('game');
   // Local States
   const [mode, setMode] = useState('normal');
   const [addMonsters, setAddMonsters] = useState(true);
+  const [addSkills, setAddSkills] = useState(false);
   const [addRiftLands, setAddRiftLands] = useState(false);
 
   const handleStartGame = () => {
@@ -27,7 +29,10 @@ const Setup = () => {
       mode,
       monsters: addMonsters,
       extraRiftLands: addRiftLands,
+      skills: addSkills,
     });
+    setGame(gameEngine.state);
+    console.log(gameEngine.state);
     setScreen(SCREENS.GOALS);
   };
 
@@ -64,6 +69,17 @@ const Setup = () => {
               />
             }
             label="Add Monsters"
+          />
+
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={addSkills}
+                onChange={() => setAddSkills((value) => !value)}
+                name="add-kills"
+              />
+            }
+            label="Add Skills"
           />
 
           <FormControlLabel
