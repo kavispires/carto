@@ -5,6 +5,7 @@ export const SCREENS = {
   SCORING: 'SCORING',
   SEASON: 'SEASON',
   SETUP: 'SETUP',
+  GAME_OVER: 'GAME_OVER',
 };
 
 export const COLORS = {

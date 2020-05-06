@@ -2,7 +2,6 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 
 import useGlobalState from '../useGlobalState';
-import CARDS from '../utils/cards';
 
 import Header from './Header';
 import GoalCard from './GoalCard';

@@ -6,6 +6,7 @@ import useGlobalState from '../useGlobalState';
 import { SCREENS } from '../utils/constants';
 
 import Explore from './Explore';
+import GameOver from './GameOver';
 import Goals from './Goals';
 import Home from './Home';
 import Scoring from './Scoring';
@@ -14,6 +15,7 @@ import Setup from './Setup';
 
 const ScreenComponents = {
   [SCREENS.EXPLORE]: <Explore />,
+  [SCREENS.GAME_OVER]: <GameOver />,
   [SCREENS.GOALS]: <Goals />,
   [SCREENS.HOME]: <Home />,
   [SCREENS.SCORING]: <Scoring />,

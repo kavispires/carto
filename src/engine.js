@@ -208,6 +208,17 @@ class GameEngine {
     return this.state;
   }
 
+  startNewSeason() {
+    if (this.currentSeasonIndex < 3) {
+      this.setupSeason();
+      this.startSeason();
+    } else {
+      this.phase = SCREENS.GAME_OVER;
+    }
+
+    return this.state;
+  }
+
   reset() {
     this.shuffledDeck = shuffle(Object.values(CARDS.EXPLORE_CARDS));
 
@@ -226,6 +237,8 @@ class GameEngine {
     this.phase = PHASES.SEASON;
     this.explorationIndex = 0;
     this.currentDuration = 0;
+
+    return this.state;
   }
 }
 
