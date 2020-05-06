@@ -21,13 +21,29 @@ const ScreenComponents = {
   [SCREENS.SETUP]: <Setup />,
 };
 
+const getBackgroundModifier = (phase, isAmbush, isOnRuin) => {
+  if (phase !== 'EXPLORE') {
+    return '';
+  }
+
+  if (isAmbush) {
+    return 'bg-ambush';
+  }
+
+  if (isOnRuin) {
+    return 'bg-ruin';
+  }
+
+  return '';
+};
+
 const App = () => {
   // Global States
   const [isLoading] = useGlobalState('isLoading');
   const [screen] = useGlobalState('screen');
   const [game] = useGlobalState('game');
 
-  const backgroundModifier = game.isAmbush ? 'bg-ambush' : game.isOnRuin ? 'bg-ruin' : '';
+  const backgroundModifier = getBackgroundModifier(game.phase, game.isAmbush, game.isOnRuin);
 
   return (
     <Container maxWidth="lg" className={`app-container ${backgroundModifier}`}>

@@ -5,19 +5,22 @@ import {
   NORMAL_GAME_GOALS,
   PHASES,
   RIFT_LAND_ID,
-  SEASONS,
-  SEASONS_DURATION,
   SCREENS,
 } from './utils/constants';
 
 class GameEngine {
   constructor() {
     this.shuffledDeck = shuffle(Object.values(CARDS.EXPLORE_CARDS));
+
     this.goals = [];
     this.deck = [];
+
     this.riftLands = null;
+
     this.monsters = null;
-    this.usedMonsters = null;
+    this.activeMonsters = [];
+    this.usedMonsters = [];
+
     this.skills = null;
     this.currentSeason = null;
     this.currentSeasonIndex = -1;
@@ -94,10 +97,22 @@ class GameEngine {
     this.currentSeasonIndex++;
     this.currentSeason = Object.values(CARDS.SEASON_CARDS)[this.currentSeasonIndex];
     this.currentDuration = this.currentSeason.duration;
-    // If first season and rift lands, add them
-    if (this.currentSeasonIndex === 'SPRING' && this.riftLands) {
-      this.shuffledDeck = shuffle([...this.shuffledDeck, ...this.riftLands]);
+
+    let newShuffledDeck = [...this.shuffledDeck];
+
+    // Add one monster
+    if (this.monsters) {
+      this.activeMonsters.push(this.monsters.pop());
+      newShuffledDeck = [...newShuffledDeck, ...this.activeMonsters];
     }
+
+    // If first season and rift lands, add them
+    if (this.riftLands) {
+      newShuffledDeck = [...newShuffledDeck, ...this.riftLands];
+    }
+
+    // Shuffle built deck
+    newShuffledDeck = shuffle(newShuffledDeck);
 
     const newDeck = [];
 
@@ -105,15 +120,10 @@ class GameEngine {
     let duration = 0;
     let index = 0;
     while (duration < this.currentSeason.duration) {
-      const card = this.shuffledDeck[index];
+      const card = newShuffledDeck[index];
       newDeck.push(card);
       duration += card.duration;
       index++;
-    }
-
-    // Add one monster
-    if (this.monsters) {
-      newDeck.push(this.monsters.pop());
     }
 
     this.deck = shuffle(newDeck);
@@ -157,13 +167,29 @@ class GameEngine {
       return this.goToPreviousCard();
     }
 
+    if (this.currentCard.type === 'ambush') {
+      this.activeMonsters.push(this.usedMonsters.pop());
+    }
+
     return this.state;
   }
 
   goToNextCard() {
-    console.log(this.currentDuration);
     if (this.currentDuration <= 0) {
       return this.goToScore();
+    }
+
+    if (this.currentCard.type === 'ambush') {
+      // remove from active monsters
+      this.activeMonsters = this.activeMonsters.reduce((acc, monsterCard) => {
+        if (monsterCard.number === this.currentCard.number) {
+          this.usedMonsters.push(monsterCard);
+        } else {
+          acc.push(monsterCard);
+        }
+
+        return acc;
+      }, []);
     }
 
     this.explorationIndex++;
@@ -184,11 +210,16 @@ class GameEngine {
 
   reset() {
     this.shuffledDeck = shuffle(Object.values(CARDS.EXPLORE_CARDS));
+
     this.goals = [];
     this.deck = [];
+
     this.riftLands = null;
+
     this.monsters = null;
-    this.usedMonsters = null;
+    this.activeMonsters = [];
+    this.usedMonsters = [];
+
     this.skills = null;
     this.currentSeason = null;
     this.currentSeasonIndex = -1;
