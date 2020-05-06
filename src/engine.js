@@ -1,5 +1,5 @@
 import { shuffle, getRandomItems, getRandomItem } from './utils';
-import cards from './utils/cards';
+import CARDS from './utils/cards';
 import {
   SIMPLE_GAME_GOALS,
   NORMAL_GAME_GOALS,
@@ -7,11 +7,12 @@ import {
   RIFT_LAND_ID,
   SEASONS,
   SEASONS_DURATION,
+  SCREENS,
 } from './utils/constants';
 
 class GameEngine {
   constructor() {
-    this.shuffledDeck = shuffle(Object.values(cards.EXPLORE_CARDS));
+    this.shuffledDeck = shuffle(Object.values(CARDS.EXPLORE_CARDS));
     this.goals = [];
     this.deck = [];
     this.riftLands = null;
@@ -21,6 +22,28 @@ class GameEngine {
     this.currentSeason = null;
     this.currentSeasonIndex = -1;
     this.phase = PHASES.SEASON;
+    this.explorationIndex = 0;
+    this.currentDuration = 0;
+  }
+
+  get previousCard() {
+    return this.deck[this.explorationIndex - 1];
+  }
+
+  get currentCard() {
+    return this.deck[this.explorationIndex];
+  }
+
+  get nextCard() {
+    return this.deck[this.explorationIndex + 1];
+  }
+
+  get isOnRuin() {
+    return this.previousCard?.type === 'ruin';
+  }
+
+  get isAmbush() {
+    return this.currentCard?.type === 'ambush';
   }
 
   get state() {
@@ -30,6 +53,12 @@ class GameEngine {
       skills: this.skills,
       currentSeason: this.currentSeason,
       phase: this.phase,
+      previousCard: this.previousCard,
+      currentCard: this.currentCard,
+      nextCard: this.nextCard,
+      currentDuration: this.currentDuration,
+      isOnRuin: this.isOnRuin,
+      isAmbush: this.isAmbush,
     };
   }
 
@@ -38,13 +67,13 @@ class GameEngine {
     this.setupGoals(mode);
 
     // Add monsters
-    this.monsters = monsters ? shuffle(Object.values(cards.AMBUSH_CARDS)) : null;
+    this.monsters = monsters ? shuffle(Object.values(CARDS.AMBUSH_CARDS)) : null;
 
     // Add extra Rift Lands
-    this.riftLands = extraRiftLands ? new Array(2).fill(cards.EXPLORE_CARDS[RIFT_LAND_ID]) : null;
+    this.riftLands = extraRiftLands ? new Array(2).fill(CARDS.EXPLORE_CARDS[RIFT_LAND_ID]) : null;
 
     // Add skills
-    this.skills = skills ? getRandomItems(cards.SKILL_CARDS, 3) : null;
+    this.skills = skills ? getRandomItems(CARDS.SKILL_CARDS, 3) : null;
 
     // Prepare deck
     this.setupSeason();
@@ -53,29 +82,29 @@ class GameEngine {
   setupGoals(mode) {
     const goalsIndexes = mode === 'simple' ? SIMPLE_GAME_GOALS : NORMAL_GAME_GOALS;
 
-    const forestGoal = cards.GOAL_CARDS[getRandomItem(goalsIndexes.forests)];
-    const farmlandsGoal = cards.GOAL_CARDS[getRandomItem(goalsIndexes.farmlands)];
-    const villagesGoal = cards.GOAL_CARDS[getRandomItem(goalsIndexes.villages)];
-    const territoryGoal = cards.GOAL_CARDS[getRandomItem(goalsIndexes.territory)];
+    const forestGoal = CARDS.GOAL_CARDS[getRandomItem(goalsIndexes.forests)];
+    const farmlandsGoal = CARDS.GOAL_CARDS[getRandomItem(goalsIndexes.farmlands)];
+    const villagesGoal = CARDS.GOAL_CARDS[getRandomItem(goalsIndexes.villages)];
+    const territoryGoal = CARDS.GOAL_CARDS[getRandomItem(goalsIndexes.territory)];
 
     this.goals = shuffle([forestGoal, farmlandsGoal, villagesGoal, territoryGoal]);
   }
 
   setupSeason() {
     this.currentSeasonIndex++;
-    this.currentSeason = SEASONS[this.currentSeasonIndex];
-
-    let newDeck = [];
-
+    this.currentSeason = Object.values(CARDS.SEASON_CARDS)[this.currentSeasonIndex];
+    this.currentDuration = this.currentSeason.duration;
     // If first season and rift lands, add them
     if (this.currentSeasonIndex === 'SPRING' && this.riftLands) {
-      newDeck = [...this.riftLands];
+      this.shuffledDeck = shuffle([...this.shuffledDeck, ...this.riftLands]);
     }
+
+    const newDeck = [];
 
     // Prepare deck
     let duration = 0;
     let index = 0;
-    while (duration < SEASONS_DURATION[this.currentSeason]) {
+    while (duration < this.currentSeason.duration) {
       const card = this.shuffledDeck[index];
       newDeck.push(card);
       duration += card.duration;
@@ -107,12 +136,54 @@ class GameEngine {
         }
       }
     }
+
+    this.explorationIndex = this.deck[0].type === 'ruin' ? 1 : 0;
+
+    return this.state;
   }
 
-  nextCard() {}
+  startSeason() {
+    this.phase = SCREENS.EXPLORE;
+    this.currentDuration -= this.deck[this.explorationIndex].duration;
+
+    return this.state;
+  }
+
+  goToPreviousCard() {
+    this.explorationIndex--;
+    this.currentDuration += this.deck[this.explorationIndex].duration;
+
+    if (this.currentCard.type === 'ruin') {
+      return this.goToPreviousCard();
+    }
+
+    return this.state;
+  }
+
+  goToNextCard() {
+    console.log(this.currentDuration);
+    if (this.currentDuration <= 0) {
+      return this.goToScore();
+    }
+
+    this.explorationIndex++;
+    this.currentDuration -= this.deck[this.explorationIndex].duration;
+
+    if (this.currentCard.type === 'ruin') {
+      return this.goToNextCard();
+    }
+
+    return this.state;
+  }
+
+  goToScore() {
+    this.phase = SCREENS.SCORING;
+
+    return this.state;
+  }
 
   reset() {
-    this.shuffledDeck = shuffle(Object.values(cards.EXPLORE_CARDS));
+    this.shuffledDeck = shuffle(Object.values(CARDS.EXPLORE_CARDS));
     this.goals = [];
     this.deck = [];
     this.riftLands = null;
@@ -121,7 +192,9 @@ class GameEngine {
     this.skills = null;
     this.currentSeason = null;
     this.currentSeasonIndex = -1;
-    this.phase = PHASES.EXPLORE;
+    this.phase = PHASES.SEASON;
+    this.explorationIndex = 0;
+    this.currentDuration = 0;
   }
 }
 

@@ -24,10 +24,10 @@ const Home = () => {
       <img className="logo" src={logo} alt="Carto logo" />
       <h1>Carto</h1>
       <div className="home__actions">
-        <Button variant="outlined" className="btn" onClick={handleCreateGame}>
+        <Button variant="outlined" className="btn btn--outline" onClick={handleCreateGame}>
           Create Game
         </Button>
-        <Button variant="outlined" className="btn" onClick={handleResumeGame} disabled>
+        <Button variant="outlined" className="btn btn--outline" onClick={handleResumeGame} disabled>
           Resume Game
         </Button>
       </div>

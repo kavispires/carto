@@ -1,0 +1,27 @@
+.explore {
+  &__playarea {
+    display: flex;
+    justify-content: center;
+    margin-bottom: $unit3;
+  }
+}
+
+.explore-card {
+  text-align: center;
+
+  &--current {
+    position: relative;
+  }
+}
+
+.bg-ambush {
+  #root & {
+    background: $color-purple;
+  }
+}
+
+.bg-ruin {
+  #root & {
+    background: $color-ruin;
+  }
+}

@@ -25,9 +25,12 @@ const App = () => {
   // Global States
   const [isLoading] = useGlobalState('isLoading');
   const [screen] = useGlobalState('screen');
+  const [game] = useGlobalState('game');
+
+  const backgroundModifier = game.isAmbush ? 'bg-ambush' : game.isOnRuin ? 'bg-ruin' : '';
 
   return (
-    <Container maxWidth="lg" className="app-container">
+    <Container maxWidth="lg" className={`app-container ${backgroundModifier}`}>
       {isLoading ? <LinearProgress /> : <div className="progress-bar-placeholder" />}
       {ScreenComponents[screen]}
     </Container>

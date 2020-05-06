@@ -32,7 +32,6 @@ const Setup = () => {
       skills: addSkills,
     });
     setGame(gameEngine.state);
-    console.log(gameEngine.state);
     setScreen(SCREENS.GOALS);
   };
 
@@ -77,6 +76,7 @@ const Setup = () => {
                 checked={addSkills}
                 onChange={() => setAddSkills((value) => !value)}
                 name="add-kills"
+                disabled
               />
             }
             label="Add Skills"
@@ -94,8 +94,8 @@ const Setup = () => {
           />
         </FormControl>
       </FormGroup>
-      <div className="home__actions">
-        <Button variant="outlined" className="btn" onClick={handleStartGame}>
+      <div className="setup__actions">
+        <Button variant="outlined" className="btn--outline" onClick={handleStartGame}>
           Start Game
         </Button>
       </div>

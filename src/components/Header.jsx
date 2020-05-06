@@ -14,6 +14,7 @@ const Header = ({ title, isExploreDisabled = false, isGoalsDisabled = false }) =
   // Global States
   const [game] = useGlobalState('game');
   const [, setScreen] = useGlobalState('screen');
+  console.log(game);
 
   const handleResume = () => {
     setScreen(game.phase);

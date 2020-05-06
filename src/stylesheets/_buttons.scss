@@ -1,0 +1,7 @@
+.btn--outline {
+  &.MuiButton-root {
+    color: $color-primary;
+    border-color: $color-primary;
+    margin: $unit1 $unit2;
+  }
+}

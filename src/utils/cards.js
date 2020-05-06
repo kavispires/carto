@@ -106,29 +106,52 @@ const EXPLORE_CARDS = {
   },
 };
 
+const EDICT_CARDS = [
+  {
+    number: 22,
+    letter: 'A',
+    index: 0,
+  },
+  {
+    number: 23,
+    letter: 'B',
+    index: 1,
+  },
+  {
+    number: 24,
+    letter: 'C',
+    index: 2,
+  },
+  {
+    number: 25,
+    letter: 'D',
+    index: 3,
+  },
+];
+
 const SEASON_CARDS = {
   18: {
     number: 18,
     name: 'Spring',
-    scores: ['A', 'B'],
+    scores: [EDICT_CARDS[0], EDICT_CARDS[1]],
     duration: 8,
   },
   19: {
     number: 19,
     name: 'Summer',
-    scores: ['B', 'C'],
+    scores: [EDICT_CARDS[1], EDICT_CARDS[2]],
     duration: 8,
   },
   20: {
     number: 20,
     name: 'Fall',
-    scores: ['C', 'D'],
+    scores: [EDICT_CARDS[2], EDICT_CARDS[3]],
     duration: 7,
   },
   21: {
     number: 21,
     name: 'Winter',
-    scores: ['D', 'A'],
+    scores: [EDICT_CARDS[3], EDICT_CARDS[0]],
     duration: 6,
   },
 };
@@ -239,25 +262,6 @@ const GOAL_CARDS = {
       '1 point per empty space surrounded on all four sides by filled spaces or the edge of the map.',
   },
 };
-
-const EDICT_CARDS = [
-  {
-    number: 22,
-    letter: 'A',
-  },
-  {
-    number: 23,
-    letter: 'B',
-  },
-  {
-    number: 24,
-    letter: 'C',
-  },
-  {
-    number: 25,
-    letter: 'D',
-  },
-];
 
 const SKILL_CARDS = {
   51: {
