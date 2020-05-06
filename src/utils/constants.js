@@ -38,6 +38,7 @@ export const SEASONS_DURATION = {
 };
 
 export const PHASES = {
+  SEASON: 'SEASON',
   EXPLORE: 'EXPLORE',
   SCORING: 'SCORING',
 };

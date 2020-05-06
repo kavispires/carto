@@ -2,7 +2,6 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 
 import useGlobalState from '../useGlobalState';
-import { SCREENS } from '../utils/constants';
 import CARDS from '../utils/cards';
 
 import Header from './Header';
@@ -14,7 +13,7 @@ const Goals = () => {
   const [, setScreen] = useGlobalState('screen');
 
   const handleResume = () => {
-    setScreen(SCREENS.EXPLORE);
+    setScreen(game.phase);
   };
 
   return (

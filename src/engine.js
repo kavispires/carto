@@ -20,7 +20,7 @@ class GameEngine {
     this.skills = null;
     this.currentSeason = null;
     this.currentSeasonIndex = -1;
-    this.phase = PHASES.EXPLORE;
+    this.phase = PHASES.SEASON;
   }
 
   get state() {
@@ -109,8 +109,10 @@ class GameEngine {
     }
   }
 
+  nextCard() {}
+
   reset() {
-    this.shuffledDeck = shuffle(cards.EXPLORE_CARDS);
+    this.shuffledDeck = shuffle(Object.values(cards.EXPLORE_CARDS));
     this.goals = [];
     this.deck = [];
     this.riftLands = null;
