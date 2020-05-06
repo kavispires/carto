@@ -1,0 +1,145 @@
+body {
+  font-family: 'Noto Serif', serif;
+  background: linear-gradient(to top, #3a3128, #41352b, #483a2e, #503e31, #584235);
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  color: #ffffff;
+}
+
+.app-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  width: 50%;
+  max-width: 150px;
+}
+
+.logo-small {
+  width: 20%;
+  max-width: 80px;
+}
+
+h1 {
+  text-transform: uppercase;
+}
+
+.home {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.home__actions .btn {
+  color: #e09264;
+  border-color: #e09264;
+  margin: 4px 8px;
+}
+
+.setup {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+}
+.header.MuiAppBar-colorPrimary {
+  background: #e09264;
+}
+.header.MuiAppBar-root {
+  flex-direction: row;
+  padding: 0 16px;
+}
+.header.MuiAppBar-root h3 {
+  flex: 2;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.goals-list {
+  display: flex;
+  padding: 16px 0;
+}
+
+.goal-card {
+  width: 25%;
+  padding: 0 8px;
+  display: flex;
+  flex-direction: row;
+}
+.goal-card__types {
+  margin-right: 4px;
+}
+
+.card {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: black 3px 3px 10px;
+}
+.card--padded {
+  margin: 0 16px;
+}
+
+.card-container {
+  width: 200px;
+  position: relative;
+}
+
+.card-mini {
+  width: 50px;
+  border-radius: 5px;
+  box-shadow: black 2px 2px 5px;
+}
+.card-mini--ruin {
+  width: 60px;
+  left: auto;
+  right: -15px;
+  top: 45px;
+  transform: rotate(15deg);
+  border: 2px solid white;
+}
+
+.card-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+}
+.card-icon--selected {
+  box-shadow: black 2px 2px 5px;
+  left: -55px;
+  top: 75px;
+}
+.card-icon--inline-title {
+  transform: translateY(13px);
+  box-shadow: black 2px 2px 5px;
+  margin: 0 8px;
+}
+
+.card--faded-left {
+  width: 150px;
+  margin-right: 30px;
+  opacity: 0.3;
+}
+
+.card--faded-right {
+  width: 150px;
+  margin-left: 30px;
+  opacity: 0.3;
+}

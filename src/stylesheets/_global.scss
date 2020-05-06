@@ -1,0 +1,32 @@
+body {
+  font-family: 'Noto Serif', serif;
+  background: linear-gradient(to top, #3a3128, #41352b, #483a2e, #503e31, #584235);
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  color: $color-white;
+}
+
+.app-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  width: 50%;
+  max-width: 150px;
+}
+
+.logo-small {
+  width: 20%;
+  max-width: 80px;
+}
+
+h1 {
+  text-transform: uppercase;
+}

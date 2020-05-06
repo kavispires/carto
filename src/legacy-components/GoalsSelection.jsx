@@ -25,25 +25,18 @@ const Goal = ({
       {Boolean(selectedGoalCard) ? (
         <div className="card-container">
           <Card id={letterCard.number} className="card-mini" />
-          <Card
-            id={ICONS[goalType]}
-            className="card-icon card-icon--selected"
-            prefix="icon-"
-          />
+          <Card id={ICONS[goalType]} className="card-icon card-icon--selected" prefix="icon-" />
           <Card id={selectedGoalCard.number} />
         </div>
       ) : (
         <Card id={letterCard.number} />
       )}
       <div className="select">
-        <select
-          onChange={e => selectGoalCard(e.target.value, letterCard.letter)}
-          defaultValue=""
-        >
+        <select onChange={(e) => selectGoalCard(e.target.value, letterCard.letter)} defaultValue="">
           <option value="" disabled>
             Select a Goal
           </option>
-          {CARDS.GOAL_CARDS.map(card => (
+          {CARDS.GOAL_CARDS.map((card) => (
             <option
               key={card.number}
               value={card.number}
@@ -66,12 +59,7 @@ const Goal = ({
   );
 };
 
-const GoalsSelection = ({
-  selectGoalCard,
-  selectRandomGoalCard,
-  state,
-  switchTabs,
-}) => {
+const GoalsSelection = ({ selectGoalCard, selectRandomGoalCard, state, switchTabs }) => {
   return (
     <main>
       <h1 className="title">Select Goals</h1>

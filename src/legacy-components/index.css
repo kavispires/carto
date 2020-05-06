@@ -3,14 +3,7 @@
 /* GLOBAL */
 body {
   font-family: 'Noto Serif', serif;
-  background: linear-gradient(
-    to top,
-    #3a3128,
-    #41352b,
-    #483a2e,
-    #503e31,
-    #584235
-  );
+  background: linear-gradient(to top, #3a3128, #41352b, #483a2e, #503e31, #584235);
   margin: 0;
   width: 100%;
   height: 100vw;
@@ -69,14 +62,7 @@ ul {
 /* MENU */
 
 .menu {
-  background-image: linear-gradient(
-    to left,
-    #3a3128,
-    #322922,
-    #29211b,
-    #211a15,
-    #1a120d
-  );
+  background-image: linear-gradient(to left, #3a3128, #322922, #29211b, #211a15, #1a120d);
   min-height: 50px;
   border-bottom: 2px solid #1a120d;
 }

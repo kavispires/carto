@@ -10,18 +10,12 @@ const Scoring = ({ state, nextTurn }) => {
     return (
       <main>
         <h1 className="title">
-          <Card
-            id="season"
-            className="card-icon card-icon--inline-title"
-            prefix="icon-"
-          />
+          <Card id="season" className="card-icon card-icon--inline-title" prefix="icon-" />
           Scoring Season: {currentSeason.name}
         </h1>
-        <h2 className="subtitle">
-          Scoring: {currentSeason.scores.join(' & ')}
-        </h2>
+        <h2 className="subtitle">Scoring: {currentSeason.scores.join(' & ')}</h2>
         <section className="seasonarea">
-          {currentSeason.scores.map(letter => {
+          {currentSeason.scores.map((letter) => {
             const goal = goals[letter];
             return (
               <div
