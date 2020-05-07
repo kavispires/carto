@@ -5,6 +5,7 @@ export const SCREENS = {
   SCORING: 'SCORING',
   SEASON: 'SEASON',
   SETUP: 'SETUP',
+  GAME_OVER: 'GAME_OVER',
 };
 
 export const COLORS = {
@@ -27,15 +28,6 @@ export const NORMAL_GAME_GOALS = {
 };
 
 export const RIFT_LAND_ID = 17;
-
-export const SEASONS = ['SPRING', 'SUMMER', 'FALL', 'WINTER'];
-
-export const SEASONS_DURATION = {
-  SPRING: 8,
-  SUMMER: 8,
-  FALL: 7,
-  WINTER: 6,
-};
 
 export const PHASES = {
   SEASON: 'SEASON',

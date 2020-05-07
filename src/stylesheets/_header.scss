@@ -6,6 +6,14 @@
     background: $color-primary;
   }
 
+  &--ambush.MuiAppBar-colorPrimary {
+    background: $color-purple-light;
+  }
+
+  &--ruin.MuiAppBar-colorPrimary {
+    background: $color-ruin-light;
+  }
+
   &.MuiAppBar-root {
     flex-direction: row;
     padding: 0 $unit3;

@@ -12,6 +12,10 @@
   display: flex;
   flex-direction: row;
 
+  &--inactive {
+    opacity: 35%;
+  }
+
   &__types {
     margin-right: $unit1;
   }
