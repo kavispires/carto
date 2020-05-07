@@ -3,16 +3,16 @@ import Button from '@material-ui/core/Button';
 
 import logo from '../images/carto-logo.svg';
 
-import useGlobalState from '../useGlobalState';
 import gameEngine from '../engine';
+import useGlobalState from '../useGlobalState';
 import { SCREENS } from '../utils/constants';
 
 import Header from './Header';
 
 const GameOver = () => {
   // Global States
-  const [, setScreen] = useGlobalState('screen');
   const [, setGame] = useGlobalState('game');
+  const [, setScreen] = useGlobalState('screen');
 
   const handStartNewGame = () => {
     setGame(gameEngine.reset());

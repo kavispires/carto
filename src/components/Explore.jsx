@@ -5,9 +5,9 @@ import useGlobalState from '../useGlobalState';
 
 import gameEngine from '../engine';
 
-import Header from './Header';
 import Card from './Card';
 import ExploreGoal from './ExploreGoal';
+import Header from './Header';
 
 const PreviousCard = ({ previousCard, onClick }) => {
   const cardNumber = previousCard?.number || 0;

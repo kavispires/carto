@@ -16,13 +16,13 @@ import { COLORS, SCREENS } from '../utils/constants';
 
 const Setup = () => {
   // Global States
-  const [, setScreen] = useGlobalState('screen');
   const [, setGame] = useGlobalState('game');
+  const [, setScreen] = useGlobalState('screen');
   // Local States
-  const [mode, setMode] = useState('normal');
   const [addMonsters, setAddMonsters] = useState(true);
-  const [addSkills, setAddSkills] = useState(false);
   const [addRiftLands, setAddRiftLands] = useState(false);
+  const [addSkills, setAddSkills] = useState(false);
+  const [mode, setMode] = useState('normal');
 
   const handleStartGame = () => {
     gameEngine.setup({

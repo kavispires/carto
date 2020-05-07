@@ -5,9 +5,8 @@ import gameEngine from './engine';
 import { SCREENS } from './utils/constants';
 
 const initialState = {
-  screen: SCREENS.HOME,
   game: gameEngine.state,
-  isLoading: false,
+  screen: SCREENS.HOME,
   showGoals: false,
 };
 

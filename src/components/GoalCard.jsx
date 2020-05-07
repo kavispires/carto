@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { GOAL_TYPE } from '../utils/constants';
 import CARDS from '../utils/cards';
+import { GOAL_TYPE } from '../utils/constants';
 
 import Card from './Card';
 

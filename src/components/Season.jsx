@@ -5,9 +5,9 @@ import useGlobalState from '../useGlobalState';
 
 import gameEngine from '../engine';
 
-import Header from './Header';
-import GoalCard from './GoalCard';
 import Card from './Card';
+import GoalCard from './GoalCard';
+import Header from './Header';
 
 const Season = () => {
   // Global States
