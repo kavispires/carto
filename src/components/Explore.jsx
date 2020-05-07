@@ -59,7 +59,7 @@ const Explore = () => {
   };
 
   const { currentSeason, currentDuration } = game;
-
+  console.log(currentDuration, currentDuration >= 0);
   return (
     <div className="explore">
       <Header title="Explore" isExploreDisabled />
@@ -128,7 +128,7 @@ const Explore = () => {
           Previous Card
         </Button>
         <Button variant="outlined" className="btn btn--outline" onClick={handleNextCard}>
-          {currentDuration ? 'Next Card' : 'Score'}
+          {currentDuration > 0 ? 'Next Card' : 'Score'}
         </Button>
       </div>
     </div>
