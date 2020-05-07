@@ -4,8 +4,6 @@
 }
 
 .goal-card {
-  // background: orange;
-
   width: 25%;
   padding: 0 $unit2;
 
@@ -18,11 +16,5 @@
 
   &__types {
     margin-right: $unit1;
-  }
-
-  &__main {
-  }
-
-  &__effect {
   }
 }

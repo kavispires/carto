@@ -1,6 +1,5 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
-import LinearProgress from '@material-ui/core/LinearProgress';
 
 import useGlobalState from '../useGlobalState';
 import { SCREENS } from '../utils/constants';
@@ -41,15 +40,13 @@ const getBackgroundModifier = (phase, isAmbush, isOnRuin) => {
 
 const App = () => {
   // Global States
-  const [isLoading] = useGlobalState('isLoading');
-  const [screen] = useGlobalState('screen');
   const [game] = useGlobalState('game');
+  const [screen] = useGlobalState('screen');
 
   const backgroundModifier = getBackgroundModifier(game.phase, game.isAmbush, game.isOnRuin);
 
   return (
     <Container maxWidth="lg" className={`app-container ${backgroundModifier}`}>
-      {isLoading ? <LinearProgress /> : <div className="progress-bar-placeholder" />}
       {ScreenComponents[screen]}
     </Container>
   );

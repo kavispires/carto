@@ -3,8 +3,8 @@ import Button from '@material-ui/core/Button';
 
 import useGlobalState from '../useGlobalState';
 
-import Header from './Header';
 import GoalCard from './GoalCard';
+import Header from './Header';
 
 const Goals = () => {
   // Global States
