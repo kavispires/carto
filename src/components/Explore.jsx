@@ -59,7 +59,7 @@ const Explore = () => {
   };
 
   const { currentSeason, currentDuration } = game;
-  console.log(currentDuration, currentDuration >= 0);
+
   return (
     <div className="explore">
       <Header title="Explore" isExploreDisabled />
