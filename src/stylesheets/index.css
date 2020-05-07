@@ -11,10 +11,12 @@ body {
 
 .app-container {
   width: 100%;
-  height: 100vh;
+  width: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-bottom: 32px;
 }
 
 .logo {
@@ -41,6 +43,7 @@ h1 {
 .setup {
   flex: 1;
   width: 100%;
+  min-height: 90vh;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -166,9 +169,13 @@ h1 {
 }
 
 .explore__playarea {
+  width: 100%;
   display: flex;
   justify-content: center;
   margin-bottom: 16px;
+}
+.explore__playarea--with-goals {
+  width: 80%;
 }
 
 .explore-card {
@@ -184,4 +191,38 @@ h1 {
 
 #root .bg-ruin {
   background: #524f4c;
+}
+
+.explore-container {
+  display: flex;
+  width: 100%;
+}
+
+.explore-goals {
+  width: 20%;
+}
+
+.explore-goal {
+  display: flex;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  margin-bottom: 8px;
+  padding: 4px;
+  display: flex;
+}
+.explore-goal--left {
+  flex-direction: row;
+}
+.explore-goal--left .icons {
+  padding-right: 8px;
+}
+.explore-goal--right {
+  flex-direction: row-reverse;
+  padding-left: 8px;
+}
+.explore-goal--right .icons {
+  padding-left: 8px;
+}
+.explore-goal .effect {
+  align-self: center;
 }

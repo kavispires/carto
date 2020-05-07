@@ -1,8 +1,13 @@
 .explore {
   &__playarea {
+    width: 100%;
     display: flex;
     justify-content: center;
     margin-bottom: $unit3;
+
+    &--with-goals {
+      width: 80%;
+    }
   }
 }
 
@@ -23,5 +28,44 @@
 .bg-ruin {
   #root & {
     background: $color-ruin;
+  }
+}
+
+.explore-container {
+  display: flex;
+  width: 100%;
+}
+
+.explore-goals {
+  width: 20%;
+}
+
+.explore-goal {
+  display: flex;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: $unit1;
+  margin-bottom: $unit2;
+  padding: $unit1;
+  display: flex;
+
+  &--left {
+    flex-direction: row;
+
+    .icons {
+      padding-right: $unit2;
+    }
+  }
+
+  &--right {
+    flex-direction: row-reverse;
+    padding-left: $unit2;
+
+    .icons {
+      padding-left: $unit2;
+    }
+  }
+
+  .effect {
+    align-self: center;
   }
 }

@@ -8,6 +8,7 @@ const initialState = {
   screen: SCREENS.HOME,
   game: gameEngine.state,
   isLoading: false,
+  showGoals: false,
 };
 
 const { useGlobalState } = createGlobalState(initialState);

@@ -7,6 +7,7 @@ import gameEngine from '../engine';
 
 import Header from './Header';
 import Card from './Card';
+import ExploreGoal from './ExploreGoal';
 
 const PreviousCard = ({ previousCard }) => {
   const cardNumber = previousCard?.number || 0;
@@ -33,7 +34,6 @@ const NextCard = ({ nextCard }) => {
   return (
     <div className="explore-card explore-card--next">
       <Card id={0} className="card card--faded-right" />
-      {/* <Card id={currentCard.number + 1} className="invisible" /> */}
     </div>
   );
 };
@@ -42,6 +42,7 @@ const Explore = () => {
   // Global States
   const [game, setGame] = useGlobalState('game');
   const [, setScreen] = useGlobalState('screen');
+  const [showGoals] = useGlobalState('showGoals');
 
   const handleNextCard = () => {
     setGame(gameEngine.goToNextCard());
@@ -66,11 +67,29 @@ const Explore = () => {
 
       <h2 className="subtitle">Time remaining: {currentDuration > -1 ? currentDuration : 0}</h2>
 
-      <section className="explore__playarea">
-        <PreviousCard previousCard={game.previousCard} />
-        <CurrentCard currentCard={game.currentCard} previousCard={game.previousCard} />
-        <NextCard nextCard={game.nextCard} />
-      </section>
+      <div className="explore-container">
+        {showGoals && (
+          <aside className="explore-goals explore-goals--left">
+            <ExploreGoal card={game.goals[0]} index={0} side="left" />
+            <ExploreGoal card={game.goals[1]} index={1} side="left" />
+          </aside>
+        )}
+
+        <section
+          className={`explore__playarea ${showGoals ? 'explore__playarea--with-goals' : ''}`}
+        >
+          <PreviousCard previousCard={game.previousCard} />
+          <CurrentCard currentCard={game.currentCard} previousCard={game.previousCard} />
+          <NextCard nextCard={game.nextCard} />
+        </section>
+
+        {showGoals && (
+          <aside className="explore-goals explore-goals--right">
+            <ExploreGoal card={game.goals[2]} index={2} side="right" />
+            <ExploreGoal card={game.goals[3]} index={3} side="right" />
+          </aside>
+        )}
+      </div>
 
       <div className="goals__actions">
         <Button
