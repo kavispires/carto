@@ -1,15 +1,23 @@
 {
   "files": {
-    "main.css": "/carto/static/css/main.ff2a5d7b.chunk.css",
-    "main.js": "/carto/static/js/main.5f972e61.chunk.js",
-    "main.js.map": "/carto/static/js/main.5f972e61.chunk.js.map",
-    "runtime~main.js": "/carto/static/js/runtime~main.dfb13643.js",
-    "runtime~main.js.map": "/carto/static/js/runtime~main.dfb13643.js.map",
-    "static/js/2.380a0335.chunk.js": "/carto/static/js/2.380a0335.chunk.js",
-    "static/js/2.380a0335.chunk.js.map": "/carto/static/js/2.380a0335.chunk.js.map",
+    "main.css": "/carto/static/css/main.af526abd.chunk.css",
+    "main.js": "/carto/static/js/main.ac1b468c.chunk.js",
+    "main.js.map": "/carto/static/js/main.ac1b468c.chunk.js.map",
+    "runtime-main.js": "/carto/static/js/runtime-main.361c2501.js",
+    "runtime-main.js.map": "/carto/static/js/runtime-main.361c2501.js.map",
+    "static/js/2.4b59894d.chunk.js": "/carto/static/js/2.4b59894d.chunk.js",
+    "static/js/2.4b59894d.chunk.js.map": "/carto/static/js/2.4b59894d.chunk.js.map",
     "index.html": "/carto/index.html",
-    "precache-manifest.c810b23e35ddaae27501a2cca5c74dc7.js": "/carto/precache-manifest.c810b23e35ddaae27501a2cca5c74dc7.js",
+    "precache-manifest.69d6eb531adad2dd28e5b0df3f855826.js": "/carto/precache-manifest.69d6eb531adad2dd28e5b0df3f855826.js",
     "service-worker.js": "/carto/service-worker.js",
-    "static/css/main.ff2a5d7b.chunk.css.map": "/carto/static/css/main.ff2a5d7b.chunk.css.map"
-  }
+    "static/css/main.af526abd.chunk.css.map": "/carto/static/css/main.af526abd.chunk.css.map",
+    "static/js/2.4b59894d.chunk.js.LICENSE.txt": "/carto/static/js/2.4b59894d.chunk.js.LICENSE.txt",
+    "static/media/carto-logo.svg": "/carto/static/media/carto-logo.de703539.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.361c2501.js",
+    "static/js/2.4b59894d.chunk.js",
+    "static/css/main.af526abd.chunk.css",
+    "static/js/main.ac1b468c.chunk.js"
+  ]
 }
