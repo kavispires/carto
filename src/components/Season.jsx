@@ -24,7 +24,7 @@ const Season = () => {
 
   return (
     <div className="season">
-      <Header title="New Season" isGoalsDisabled />
+      <Header title="New Season" isGoalsDisabled isExploreDisabled />
 
       <h1 className="title">
         <Card id="season" className="card-icon card-icon--inline-title" prefix="icon-" />

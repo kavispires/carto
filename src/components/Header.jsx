@@ -12,10 +12,26 @@ import gameEngine from '../engine';
 import useGlobalState from '../useGlobalState';
 import { SCREENS } from '../utils/constants';
 
+const getBackgroundModifier = (phase, isAmbush, isOnRuin) => {
+  if (phase !== 'EXPLORE') {
+    return '';
+  }
+
+  if (isAmbush) {
+    return 'header--ambush';
+  }
+
+  if (isOnRuin) {
+    return 'header--ruin';
+  }
+
+  return '';
+};
+
 const Header = ({ title, isExploreDisabled = false, isGoalsDisabled = false }) => {
   // Global States
   const [game] = useGlobalState('game');
-  const [, setScreen] = useGlobalState('screen');
+  const [screen, setScreen] = useGlobalState('screen');
   const [showGoals, setShowGoals] = useGlobalState('showGoals');
 
   console.log(game);
@@ -37,8 +53,10 @@ const Header = ({ title, isExploreDisabled = false, isGoalsDisabled = false }) =
     setShowGoals((flag) => !flag);
   };
 
+  const backgroundModifier = getBackgroundModifier(game.phase, game.isAmbush, game.isOnRuin);
+
   return (
-    <AppBar position="static" className="header">
+    <AppBar position="static" className={`header ${backgroundModifier}`}>
       <Button
         className="header__btn"
         onClick={handleResume}
@@ -60,7 +78,7 @@ const Header = ({ title, isExploreDisabled = false, isGoalsDisabled = false }) =
         className="header__btn"
         onClick={toggleGoalsVisibility}
         startIcon={showGoals ? <VisibilityOffIcon /> : <VisibilityIcon />}
-        disabled={!isExploreDisabled}
+        disabled={screen !== SCREENS.EXPLORE}
       >
         {showGoals ? 'Hide Goals' : 'Show Goals'}
       </Button>

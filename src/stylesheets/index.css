@@ -84,6 +84,12 @@ h1 {
 .header.MuiAppBar-colorPrimary {
   background: #e09264;
 }
+.header--ambush.MuiAppBar-colorPrimary {
+  background: #a968d0;
+}
+.header--ruin.MuiAppBar-colorPrimary {
+  background: #777370;
+}
 .header.MuiAppBar-root {
   flex-direction: row;
   padding: 0 16px;

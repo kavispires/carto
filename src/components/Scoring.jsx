@@ -23,7 +23,7 @@ const Scoring = () => {
 
   return (
     <div className="scoring">
-      <Header title={`Score ${currentSeason.name}`} isGoalsDisabled />
+      <Header title={`Score ${currentSeason.name}`} isGoalsDisabled isExploreDisabled />
 
       <h1 className="title">
         <Card id="season" className="card-icon card-icon--inline-title" prefix="icon-" />
