@@ -112,7 +112,7 @@ h1 {
   flex-direction: row;
 }
 .goal-card--inactive {
-  opacity: 35%;
+  opacity: 36%;
 }
 .goal-card__types {
   margin-right: 4px;
