@@ -65,6 +65,10 @@
     }
   }
 
+  &--active {
+    border: 1px solid white;
+  }
+
   .effect {
     align-self: center;
   }

@@ -34,8 +34,6 @@ const Header = ({ title, isExploreDisabled = false, isGoalsDisabled = false }) =
   const [screen, setScreen] = useGlobalState('screen');
   const [showGoals, setShowGoals] = useGlobalState('showGoals');
 
-  console.log(game);
-
   const handleResume = () => {
     setScreen(game.phase);
   };

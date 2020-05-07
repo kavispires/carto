@@ -127,6 +127,10 @@ h1 {
 .card--padded {
   margin: 0 16px;
 }
+.card--faded-left,
+.card--faded-right {
+  cursor: pointer;
+}
 
 .card-container {
   width: 200px;
@@ -228,6 +232,9 @@ h1 {
 }
 .explore-goal--right .icons {
   padding-left: 8px;
+}
+.explore-goal--active {
+  border: 1px solid white;
 }
 .explore-goal .effect {
   align-self: center;

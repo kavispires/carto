@@ -9,11 +9,11 @@ import Header from './Header';
 import Card from './Card';
 import ExploreGoal from './ExploreGoal';
 
-const PreviousCard = ({ previousCard }) => {
+const PreviousCard = ({ previousCard, onClick }) => {
   const cardNumber = previousCard?.number || 0;
 
   return (
-    <div className="explore-card explore-card--previous">
+    <div className="explore-card explore-card--previous" onClick={onClick}>
       <Card id={cardNumber} className="card card--faded-left" />
     </div>
   );
@@ -30,12 +30,16 @@ const CurrentCard = ({ currentCard, previousCard }) => {
   );
 };
 
-const NextCard = ({ nextCard }) => {
+const NextCard = ({ nextCard, onClick }) => {
   return (
-    <div className="explore-card explore-card--next">
+    <div className="explore-card explore-card--next" onClick={onClick}>
       <Card id={0} className="card card--faded-right" />
     </div>
   );
+};
+
+const isGoalActive = (season, letter) => {
+  return season.scores.some((score) => score.letter === letter);
 };
 
 const Explore = () => {
@@ -70,23 +74,46 @@ const Explore = () => {
       <div className="explore-container">
         {showGoals && (
           <aside className="explore-goals explore-goals--left">
-            <ExploreGoal card={game.goals[0]} index={0} side="left" />
-            <ExploreGoal card={game.goals[1]} index={1} side="left" />
+            <ExploreGoal
+              card={game.goals[0]}
+              index={0}
+              side="left"
+              isActive={isGoalActive(currentSeason, 'A')}
+            />
+            <ExploreGoal
+              card={game.goals[1]}
+              index={1}
+              side="left"
+              isActive={isGoalActive(currentSeason, 'B')}
+            />
           </aside>
         )}
 
         <section
           className={`explore__playarea ${showGoals ? 'explore__playarea--with-goals' : ''}`}
         >
-          <PreviousCard previousCard={game.previousCard} />
+          <PreviousCard
+            previousCard={game.previousCard}
+            onClick={Boolean(game.previousCard) ? handlePreviousCard : null}
+          />
           <CurrentCard currentCard={game.currentCard} previousCard={game.previousCard} />
-          <NextCard nextCard={game.nextCard} />
+          <NextCard nextCard={game.nextCard} onClick={handleNextCard} />
         </section>
 
         {showGoals && (
           <aside className="explore-goals explore-goals--right">
-            <ExploreGoal card={game.goals[2]} index={2} side="right" />
-            <ExploreGoal card={game.goals[3]} index={3} side="right" />
+            <ExploreGoal
+              card={game.goals[2]}
+              index={2}
+              side="right"
+              isActive={isGoalActive(currentSeason, 'C')}
+            />
+            <ExploreGoal
+              card={game.goals[3]}
+              index={3}
+              side="right"
+              isActive={isGoalActive(currentSeason, 'D')}
+            />
           </aside>
         )}
       </div>
